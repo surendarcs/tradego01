@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./db:/app/db
+    env_file:
+      - .env
+    environment:
+      - FLASK_DEBUG=True
+      - FLASK_ENV=development
+      - DATABASE_URL=mssql+pyodbc://@DESKTOP-7C9K4QN\SQLTRADEGO/OpenAlgoDB?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server
+    restart: unless-stopped
